@@ -41,9 +41,9 @@ const updateTodoSync = (id, updates) => {
   }
   let str="";
   for(let obj of arr) {
-    str+=JSON.stringify(obj)+"\n";
+    str+=JSON.stringify(obj, null, 2)+"\n";
   }
-  fs.writeFileSync('db.txt', JSON.stringify(str, null, 2));
+  fs.writeFileSync('db.txt', str);
 };
 
 const deleteTodoSync = (id) => {
@@ -53,7 +53,7 @@ const deleteTodoSync = (id) => {
   let str="";
   for(let obj of arr) {
     if(obj.id!==id) {
-      str+=JSON.stringify(obj)+"\n";
+      str+=JSON.stringify(obj, null, 2)+"\n";
     }
   }
   fs.writeFileSync('db.txt', JSON.stringify(str, null, 2));
