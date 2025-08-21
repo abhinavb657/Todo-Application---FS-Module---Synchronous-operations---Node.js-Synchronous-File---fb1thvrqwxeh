@@ -21,12 +21,12 @@ const createTodoSync = (todo) => {
     updatedAt: new Date().toISOString(),
   }
   const str = JSON.stringify(obj, null, 2);
-  fs.writeFileSync('db.txt', str);
+  fs.appendFileSync('db.txt', str);
 };
 
 const updateTodoSync = (id, updates) => {
   const text = fs.readFileSync('db.txt', 'utf-8');
-  const arr = JSON.parse(`[${text.split("}\n{").join("},{")}]`);
+  const arr = JSON.parse(`[${text.trim().split("\n}\n{").join("},{")}]`);
 
   for(let i in arr) {
     let obj = arr[i];
@@ -48,7 +48,7 @@ const updateTodoSync = (id, updates) => {
 
 const deleteTodoSync = (id) => {
   const text = fs.readFileSync('db.txt', 'utf-8');
-  const arr = JSON.parse(`[${text.split("}\n{").join("},{")}]`);
+  const arr = JSON.parse(`[${text.trim().split("\n}\n{").join("},{")}]`);
 
   let str="";
   for(let obj of arr) {
